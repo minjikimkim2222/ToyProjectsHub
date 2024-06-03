@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/board-list.css}">
+    <!-- 부트스트랩 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-3 d-flex justify-content-center">
+        <div class="border-custom">
+            <h2>Update Board</h2>
+
+            <form method="post" th:action="@{/updateform}" th:object="${board}">
+                <!-- id는 안보이지만, board에 매핑시켜야 올바른 id값을 가져올 수 있다 -->
+                <div>
+                    <label for="id"></label>
+                    <input id="id" type="hidden" th:field="*{id}">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name : </label> <br>
+                    <input id="name" class="form-control" type="text" th:field="*{name}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title : </label><br>
+                    <input id="title" class="form-control" type="text" th:field="*{title}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="content" class="form-label"></label>Content : <br>
+                    <textarea id="content" class="form-control" th:field="*{content}"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label"></label>Password (for validation) : <br>
+                    <input id="password" class="form-control" type="password" th:field="*{password}">
+                </div>
+
+                <button type="submit" class="btn btn-success">Update</button>
+
+                <!-- 비밀번호가 틀렸을 때 메시지 표시 -->
+                <div th:if="${param.errorMsg}">
+                    <span class="form-text text-danger">비밀번호가 틀렸습니다. 다시 입력해주세요.</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

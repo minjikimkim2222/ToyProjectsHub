@@ -1,0 +1,54 @@
+div.write a {
+    text-decoration: none;
+}
+
+td#line-deco a{
+    text-decoration: none;
+}
+
+div.content-title {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+
+    margin-bottom: 15px;
+    border-bottom: 1px solid  #b0b0b0; /* 연한 회색 색상 */
+
+}
+
+div.content-item {
+    padding: 5px;
+    margin: 10px;
+}
+
+div.border-custom {
+    border: 1px solid #b0b0b0;
+    width: 320px;
+    padding: 20px;
+}
+
+ /*view의 list,edit,delete 버튼 - 좋아요 버튼 일렬로 */
+div.button-group {
+    float: left;
+}
+
+div#like-btn {
+    float: right;
+}
+
+/* 좋아요 버튼 */
+#like-btn button {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    margin-right: 400px;
+    background-color: #99CCFF;
+    color: white;
+}
+
+.board-group {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+}

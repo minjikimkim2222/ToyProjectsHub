@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 목록 조회</title>
+    <link rel="stylesheet" th:href="@{/css/board-list.css}">
+    <!-- 부트스트랩 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container mt-3">
+        <h1 class="board-group">Board List</h1>
+
+        <!-- 사용자가 최신순,좋아요순을 선택할 수 있게 한다 -->
+        <div class="board-group">
+            <a href="list?sort=latest" class="btn btn-outline-primary btn-sm">최신순</a>
+            <a href="list?sort=likes" class="btn btn-outline-primary btn-sm">좋아요순</a>
+        </div>
+        <div class="row">
+            <div class="mb-3"> <!-- 테이블 영역 -->
+                <table th:if="${not #lists.isEmpty(boards)}" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Created At</th>
+                            <th>좋아요</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="board : ${boards}">
+                            <td th:text="${board.id}">ID</td>
+                            <td th:text="${board.name}">Name</td>
+                            <td id="line-deco">
+                                <a th:href="@{/view(id=${board.id})}"  th:text="${board.title}"></a>
+                            </td>
+                            <td th:text="${#temporals.format(board.created_at, 'yyyy/MM/dd')}">Created At</td>
+                            <td th:text="${board.likes}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 페이징처리 -->
+            <!-- 열의 너비가 3만큼이고, 3칸 떨어져서(offset) 시작-->
+            <div th:if="${boards.totalPages > 1}">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm">
+                        <li th:each="i : ${#numbers.sequence(1, boards.totalPages)}"
+                            th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
+                            <a th:href="@{/list(page=${i})}" th:text="${i}" class="page-link"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- 열의 너비가 3만큼이고, 5칸 떨어져서(offset) 시작-->
+        <div class="col-md-3 offset-md-5 write">
+            <a th:href="@{/writeform}">글쓰기</a>
+        </div>
+    </div>
+</body>
+</html>
